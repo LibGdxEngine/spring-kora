@@ -441,4 +441,16 @@ public class ReservationServiceTest {
         verify(clubRepository).save(createdClub);
     }
 
+    @Test
+    void getClubsOfSpecificUser_ReturnValidClubs() {
+        // Arrange
+        when(clubRepository.findByUser(any(User.class))).thenReturn(clubsListMock);
+        // Act
+        var returnedClubs = reservationService.getAdminClubs(userMock);
+        // Assert
+        assertEquals(returnedClubs.size(), clubsListMock.size());
+
+        verify(clubRepository).findByUser(any(User.class));
+    }
+
 }

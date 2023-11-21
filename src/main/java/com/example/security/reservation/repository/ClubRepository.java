@@ -1,6 +1,7 @@
 package com.example.security.reservation.repository;
 
 import com.example.security.reservation.entity.Club;
+import com.example.security.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,4 +14,6 @@ public interface ClubRepository extends JpaRepository<Club, Integer> {
             @Param("lat") double lat,
             @Param("lon") double lon,
             @Param("distance") double distance);
+
+    List<Club> findByUser(User owner);
 }

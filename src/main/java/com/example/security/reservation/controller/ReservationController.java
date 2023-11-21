@@ -30,6 +30,15 @@ public class ReservationController {
         var clubs = reservationService.getAllClubs();
         return ResponseEntity.ok(clubs);
     }
+    @GetMapping("/admin-clubs")
+    public ResponseEntity<List<Club>> getAdminClubs(@AuthenticationPrincipal UserDetails authentication) {
+        User user = userRepository.findByEmail(authentication.getUsername())
+                .orElseThrow(
+                        () -> new UserNotFoundException("User not found with id: " + authentication.getUsername())
+                );
+        var clubs = reservationService.getAdminClubs(user);
+        return ResponseEntity.ok(clubs);
+    }
 
     @GetMapping("/near-clubs")
     public ResponseEntity<List<ClubDto>> getNearClubs(@RequestParam("lat") double latitude,

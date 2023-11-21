@@ -249,4 +249,8 @@ public class ReservationService {
     private UserDto convertUserToDto(User user) {
         return new UserDto(user.getId(), user.getEmail());
     }
+
+    public List<Club> getAdminClubs(User admin) {
+        return clubRepository.findByUser(admin);
+    }
 }
