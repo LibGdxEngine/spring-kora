@@ -238,7 +238,7 @@ public class ReservationService {
 
     private ClubDto convertClubToDto(Club club) {
         var followers = club.getFollowers().stream().map(this::convertUserClubToDto).toList();
-        return new ClubDto(club.getId(), club.getName(), club.getUser(), followers);
+        return new ClubDto(club.getId(), club.getName(), club.getUser(), followers, club.getStadiums());
     }
 
     private UserClubDto convertUserClubToDto(UserClub userClub) {
