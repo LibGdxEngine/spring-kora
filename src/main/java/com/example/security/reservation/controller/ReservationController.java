@@ -96,7 +96,7 @@ public class ReservationController {
                 );
         Reservation createdReservation = reservationService.createReservation(
                 user, reservationRequest.stadiumId(), reservationRequest.reservationTime(),
-                "Mazen");
+                reservationRequest.playerName());
         return ResponseEntity.ok(createdReservation);
     }
 
