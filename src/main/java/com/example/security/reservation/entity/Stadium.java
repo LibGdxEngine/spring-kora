@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +25,9 @@ public class Stadium {
     private String cost;
     private String description;
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> images;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private List<String> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "club_id")

@@ -9,6 +9,7 @@ import java.util.List;
 public record ClubDto(Integer id,
                       String name,
                       User user,
+                      String address,
                       List<UserClubDto> followers,
                       List<Stadium> stadiums) {
 }
