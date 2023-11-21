@@ -26,7 +26,7 @@ public class Stadium {
     private String description;
     @ElementCollection(fetch = FetchType.EAGER)
     @Lob
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private List<String> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
