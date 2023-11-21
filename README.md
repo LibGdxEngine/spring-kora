@@ -1,0 +1,32 @@
+My starter spring boot app
+
+# Todo List:
+- Add internationalization
+- Add webscoket support
+- Add redis for session management
+- Add notifications
+- Add front-end template with Next-js and tailwind
+- Add internationalization to tailwind also
+- Build auth system using redux
+- Add google fonts
+- Add scheduling for database backup
+- Add Live templates to intelliJ 
+- Add admin dashboard for generic data analysis
+- Add firebase analytics
+- Optimize front-end for CEO
+- Make postman docs
+- Make README.md file
+- Add forget password ability
+- Add Admin-control page over users to block, deactivate, enable accounts
+- Set OAuth2 login with facebook, google and apple
+- Search for good quality ready tailwind template
+- Enable Actuators on admin dashboard
+- Enable server (ON/OFF) control for admin
+- Add data caching using redis
+- Access secure data in vault
+- Enable admin to send notification to users
+- Enable Customer service chat with admin
+- Enable online payment with "Fawry"
+- Enable file uploading to AWS
+- Enable account premium membership
+- Enable load-balancing and reverse-proxy with Nginx
