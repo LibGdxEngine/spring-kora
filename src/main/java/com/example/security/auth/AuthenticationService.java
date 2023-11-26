@@ -57,7 +57,7 @@ public class AuthenticationService {
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(Map.of("register", true),user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString());
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
@@ -69,7 +69,7 @@ public class AuthenticationService {
         );
         var user = userRepository.findByEmail(authenticationRequest.email()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString());
     }
 
 
@@ -83,6 +83,6 @@ public class AuthenticationService {
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(Map.of("registerAdmin", true),user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString());
     }
 }
