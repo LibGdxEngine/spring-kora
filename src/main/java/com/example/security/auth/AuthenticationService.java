@@ -2,6 +2,8 @@ package com.example.security.auth;
 
 import com.example.security.auth.dto.*;
 import com.example.security.config.services.JwtService;
+import com.example.security.reservation.entity.Club;
+import com.example.security.reservation.entity.UserClub;
 import com.example.security.user.Role;
 import com.example.security.user.User;
 import com.example.security.user.UserRepository;
@@ -35,7 +37,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(preRegisterRequest.password()))
                 .role(Role.USER)
                 .build();
-        var jwtToken = jwtService.generateToken(Map.of("pre-signup", true, "password", user.getPassword()),user);
+        var jwtToken = jwtService.generateToken(Map.of("pre-signup", true, "password", user.getPassword()), user);
         //send mail to the user with jwt
         try {
             emailService.sendHtmlEmail(preRegisterRequest.email(), "Hello world",
@@ -56,8 +58,8 @@ public class AuthenticationService {
                 .role(Role.USER)
                 .build();
         userRepository.save(user);
-        var jwtToken = jwtService.generateToken(Map.of("register", true),user);
-        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString());
+        var jwtToken = jwtService.generateToken(Map.of("register", true), user);
+        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString(), null);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
@@ -69,7 +71,11 @@ public class AuthenticationService {
         );
         var user = userRepository.findByEmail(authenticationRequest.email()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString());
+        return new AuthenticationResponse(jwtToken,
+                user.getEmail(),
+                user.getRole().toString(),
+                user.getFollowedClubs().stream().map(UserClub::getClub).map(Club::getId).toList()
+        );
     }
 
 
@@ -82,7 +88,7 @@ public class AuthenticationService {
                 .role(Role.ADMIN)
                 .build();
         userRepository.save(user);
-        var jwtToken = jwtService.generateToken(Map.of("registerAdmin", true),user);
-        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString());
+        var jwtToken = jwtService.generateToken(Map.of("registerAdmin", true), user);
+        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().toString(), null);
     }
 }

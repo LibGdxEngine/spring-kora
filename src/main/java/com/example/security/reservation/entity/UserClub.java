@@ -32,6 +32,7 @@ public class UserClub {
         return "Stadium{" +
                 "id=" + id +
                 "user=" + user.getUsername() +
+                "club=" + club.getName() +
                 '}';
     }
 }

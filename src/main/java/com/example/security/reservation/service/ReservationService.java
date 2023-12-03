@@ -248,6 +248,7 @@ public class ReservationService {
 
     private UserClubDto convertUserClubToDto(UserClub userClub) {
         return new UserClubDto(userClub.getId(),
+                userClub.getClub(),
                 convertUserToDto(userClub.getUser()));
     }
 

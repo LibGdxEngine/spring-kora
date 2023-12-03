@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserClubService {
@@ -29,7 +31,9 @@ public class UserClubService {
                 .orElseThrow(() -> new ClubNotFoundException("Club not found"));
 
         // Check if the relationship already exists
-        if (userClubRepository.findByUserAndClub(user, club).isPresent()) {
+        Optional<UserClub> userClubRelation = userClubRepository.findByUserAndClub(user, club);
+
+        if (userClubRelation.isPresent()) {
             throw new IllegalStateException("User already follows this club");
         }
 
